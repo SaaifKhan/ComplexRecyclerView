@@ -1,6 +1,7 @@
 package net.simplifiedcoding.multiviewlist.ui
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import net.simplifiedcoding.multiviewlist.R
@@ -16,6 +17,7 @@ class HomeRecyclerViewAdapter : RecyclerView.Adapter<HomeRecyclerViewHolder>() {
             notifyDataSetChanged()
         }
 
+    var itemCLickListener : ((view:View,item:HomeRecyclerViewItem,position : Int) -> Unit)? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HomeRecyclerViewHolder {
         return when (viewType) {
@@ -41,6 +43,7 @@ class HomeRecyclerViewAdapter : RecyclerView.Adapter<HomeRecyclerViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: HomeRecyclerViewHolder, position: Int) {
+        holder.itemCLickListener= itemCLickListener
         when (holder) {
             is HomeRecyclerViewHolder.TitleViewHolder -> holder.bind(items[position] as HomeRecyclerViewItem.Title)
             is HomeRecyclerViewHolder.directorViewHolder -> holder.bind(items[position] as HomeRecyclerViewItem.Director)
